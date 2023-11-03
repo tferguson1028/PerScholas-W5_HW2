@@ -73,13 +73,30 @@ topMenuEl.addEventListener("click", function(event)
       showingSubMenu = true;
       buildSubMenu(link.subLinks); // There's no reason to put 5.7 this in a lower space.
       subMenuEl.style.top = "100%";
-      break;
+      return;
     }else
     {
       showingSubMenu = false;
       subMenuEl.style.top = "0";
     }
   }
+  
+  setPageToTag(targetEl);
+});
+
+subMenuEl.addEventListener("click", function(event)
+{
+  event.preventDefault();
+  event.stopPropagation();
+  let targetEl = event.target;
+  if(targetEl.tagName !== "A")
+    return;
+    
+  console.log(targetEl);
+  showingSubMenu = false;
+  subMenuEl.style.top = "0";
+  topMenuLinks.forEach((a) => a.classList.remove("active"));
+  setPageToTag(targetEl);
 });
 
 
@@ -93,6 +110,11 @@ function buildSubMenu(subLinks)
     subLinkEl.textContent = link.text;
     subMenuEl.appendChild(subLinkEl);
   }
+}
+
+function setPageToTag(tag)
+{
+  mainEl.innerHTML = `<h1>${tag.textContent}</h1>`;
 }
 
 
