@@ -66,20 +66,35 @@ topMenuEl.addEventListener("click", function(event)
   targetEl.classList.add("active");
   
   // This works, yay
+  let subLinks;
   for(let link of menuLinks)
   {
     if(link.text === targetEl.textContent && link.subLinks !== undefined)
     {
       showingSubMenu = true;
+      buildSubMenu(link.subLinks); // There's no reason to 5.7 this in a lower space.
+      subMenuEl.style.top = "100%";
       break;
     }else
+    {
       showingSubMenu = false;
+      subMenuEl.style.top = "0";
+    }
   }
-  console.log(showingSubMenu);
-  
-  
 });
 
+
+function buildSubMenu(subLinks)
+{
+  subMenuEl.replaceChildren();
+  for(let link of subLinks)
+  {
+    let subLinkEl = document.createElement("a");
+    subLinkEl.href = link.href;
+    subLinkEl.textContent = link.text;
+    subMenuEl.appendChild(subLinkEl);
+  }
+}
 
 
 
