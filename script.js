@@ -66,13 +66,12 @@ topMenuEl.addEventListener("click", function(event)
   targetEl.classList.add("active");
   
   // This works, yay
-  let subLinks;
   for(let link of menuLinks)
   {
     if(link.text === targetEl.textContent && link.subLinks !== undefined)
     {
       showingSubMenu = true;
-      buildSubMenu(link.subLinks); // There's no reason to 5.7 this in a lower space.
+      buildSubMenu(link.subLinks); // There's no reason to put 5.7 this in a lower space.
       subMenuEl.style.top = "100%";
       break;
     }else
